@@ -22,13 +22,13 @@ jobs:
           dotnet-version: '8.0.x'
           
       - name: Restore
-        run: dotnet restore ./OneParagraph.API/OneParagraph.API.csproj
+        run: dotnet restore ./OneParagraph.Backend/OneParagraph.API/OneParagraph.API.csproj
         
       - name: Build
-        run: dotnet build ./OneParagraph.API/OneParagraph.API.csproj --configuration Release --no-restore
+        run: dotnet build ./OneParagraph.Backend/OneParagraph.API/OneParagraph.API.csproj --configuration Release --no-restore
         
       - name: Publish
-        run: dotnet publish ./OneParagraph.API/OneParagraph.API.csproj --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: dotnet publish ./OneParagraph.Backend/OneParagraph.API/OneParagraph.API.csproj --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
         
       - name: Deployment
         uses: azure/webapps-deploy@v2
