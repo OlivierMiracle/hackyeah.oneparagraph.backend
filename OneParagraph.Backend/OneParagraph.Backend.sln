@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiPrompter.Runtime", "AiPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneParagraph.API", "OneParagraph.API\OneParagraph.API.csproj", "{B4C0BFE1-FD8F-438E-8C88-300D9587C0CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneParagraph.Shared", "OneParagraph.Shared\OneParagraph.Shared.csproj", "{98E98796-1ABC-4F99-A350-7CD5C087D23D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B4C0BFE1-FD8F-438E-8C88-300D9587C0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C0BFE1-FD8F-438E-8C88-300D9587C0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C0BFE1-FD8F-438E-8C88-300D9587C0CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E98796-1ABC-4F99-A350-7CD5C087D23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E98796-1ABC-4F99-A350-7CD5C087D23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E98796-1ABC-4F99-A350-7CD5C087D23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E98796-1ABC-4F99-A350-7CD5C087D23D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
