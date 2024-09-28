@@ -26,4 +26,8 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\OneParagraph.Shared\OneParagraph.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -17,7 +17,7 @@ app.MapEndpoints();
 
 app.UseSwaggerWithUi();
 
-app.ApplyMigration();
+app.ApplyMigrations();
 
 app.UseHttpsRedirection();
 
