@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OneParagraph.API.Database;
-using OneParagraph.API.EndpointExtensions;
 using OneParagraph.API.Extensions;
 using Swashbuckle.AspNetCore.Filters;
 
@@ -18,11 +17,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
 
 // Add services to the container.
-builder.Services.AddAuthorization();
 
-builder.Services
-    .AddMvcCore()
-    .AddApiExplorer();
+builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -50,7 +50,7 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
-WebApplication app = builder.Build();
+var app = builder.Build();
 
 app.UseCors(builder => builder
     .AllowAnyHeader()
@@ -59,16 +59,18 @@ app.UseCors(builder => builder
     .AllowCredentials()
 );
 
-app.MapEndpoints();
-
-app.UseSwaggerWithUi();
-
-app.ApplyMigrations();
-
-app.UseHttpsRedirection();
+// Configure the HTTP request pipeline.
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapIdentityApi<IdentityUser>();
 
+app.UseHttpsRedirection();
+
 app.UseAuthorization();
+
+app.MapEndpoints();
+
+app.MapControllers();
 
 app.Run();

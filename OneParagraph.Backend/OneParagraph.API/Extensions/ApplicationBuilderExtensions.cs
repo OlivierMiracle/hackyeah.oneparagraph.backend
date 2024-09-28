@@ -1,3 +1,4 @@
+using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Builder;
 
 namespace OneParagraph.API.Extensions;
@@ -8,7 +9,6 @@ public static class ApplicationBuilderExtensions
     {
         app.UseSwagger();
         app.UseSwaggerUI();
-
         return app;
     } 
 }
