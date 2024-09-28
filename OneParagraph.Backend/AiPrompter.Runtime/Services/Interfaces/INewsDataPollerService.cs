@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AiPrompter.Runtime.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AiPrompter.Runtime.Services.Interfaces;
 
 public interface INewsDataPollerService
 {
-    Task GetCategoryNewsAsync(string category);
+    Task<List<MarketauxGetNewsByCategoryResponse>> GetCategoryNewsAsync()
 }

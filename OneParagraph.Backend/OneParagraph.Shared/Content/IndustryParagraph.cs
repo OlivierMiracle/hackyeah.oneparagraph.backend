@@ -1,6 +1,6 @@
-using OneParagraph.Shared.Domain.Enums;
+using OneParagraph.Shared.Enums;
 
-namespace OneParagraph.Shared.Domain.Content;
+namespace OneParagraph.Shared.Content;
 
 public class IndustryParagraph
 {

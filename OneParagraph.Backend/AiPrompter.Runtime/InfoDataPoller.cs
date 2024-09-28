@@ -14,7 +14,7 @@ public class InfoDataPoller(
     public async Task<Response> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get")]HttpRequest request)
     {
-        await newsDataPollerService.GetCategoryNewsAsync("test");
+        var apiResult = await newsDataPollerService.GetCategoryNewsAsync();
 
         return new Response(true);
     }
