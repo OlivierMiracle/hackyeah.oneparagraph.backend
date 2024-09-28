@@ -1,4 +1,4 @@
-namespace OneParagraph.Shared.Domain.Enums;
+namespace OneParagraph.Shared.Enums;
 
 public enum Industries
 {
