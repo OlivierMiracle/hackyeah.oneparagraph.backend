@@ -20,6 +20,10 @@ builder.Services.AddCors();
 // Add services to the container.
 builder.Services.AddAuthorization();
 
+builder.Services
+    .AddMvcCore()
+    .AddApiExplorer();
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("oauth2", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
