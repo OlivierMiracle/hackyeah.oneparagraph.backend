@@ -1,15 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Reflection;
-using Asp.Versioning;
-using Asp.Versioning.Builder;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using OneParagraph.API.Database;
 using OneParagraph.API.Extensions;
 using Swashbuckle.AspNetCore.Filters;
@@ -72,6 +68,8 @@ app.MapIdentityApi<IdentityUser>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapEndpoints();
 
 app.MapControllers();
 
