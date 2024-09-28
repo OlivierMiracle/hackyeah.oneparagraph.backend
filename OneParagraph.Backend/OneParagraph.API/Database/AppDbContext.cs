@@ -2,11 +2,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using OneParagraph.Shared.Content;
 
 namespace OneParagraph.API.Database;
 
 public class AppDbContext : IdentityDbContext<IdentityUser>
 {
+    public DbSet<IndustryParagraph> IndustryParagraphs { get; set; }
+    
     public AppDbContext() { }
     public AppDbContext(DbContextOptions options) : base(options) { }
 
