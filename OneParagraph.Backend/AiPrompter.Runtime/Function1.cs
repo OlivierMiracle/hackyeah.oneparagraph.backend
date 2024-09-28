@@ -10,7 +10,7 @@ namespace AiPrompter.Runtime
         [FunctionName("Function1")]
         public void Run([TimerTrigger("* * * * * *")]TimerInfo myTimer, ILogger log)
         {
-            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+            log.LogInformation($"C#s Timer trigger function executed at: {DateTime.Now}");
         }
     }
 }
