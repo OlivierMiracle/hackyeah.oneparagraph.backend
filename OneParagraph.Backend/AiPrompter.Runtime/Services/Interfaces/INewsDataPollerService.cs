@@ -4,5 +4,5 @@ namespace AiPrompter.Runtime.Services.Interfaces;
 
 public interface INewsDataPollerService
 {
-    Task GetNewsDataAsync();
+    Task GetCategoryNewsAsync(string category);
 }
