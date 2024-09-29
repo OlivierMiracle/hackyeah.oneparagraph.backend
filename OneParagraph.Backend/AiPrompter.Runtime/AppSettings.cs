@@ -14,5 +14,9 @@ public class AppSettings
 
     public string MarketauxApiBaseUrl { get; set; }
     public string MarketauxApiKey { get; set; }
+    public string MarketauxApiKeyStock { get; set; }
     public string DatabaseConnectionString { get; set; }
+
+    public string OpenApiKey { get; set; }
+    public string OpenApiUrl { get; set; }
 }

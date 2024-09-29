@@ -127,6 +127,9 @@ namespace OneParagraph.API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -234,16 +237,19 @@ namespace OneParagraph.API.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("SourceNames")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("SourceUrls")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("StockId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Stocks")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StockId");
 
                     b.ToTable("IndustryParagraphs");
                 });
@@ -264,7 +270,40 @@ namespace OneParagraph.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stock");
+                    b.ToTable("Stocks");
+                });
+
+            modelBuilder.Entity("OneParagraph.Shared.Content.StockParagraph", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Paragraph")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("StockId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("StockParagraphs");
+                });
+
+            modelBuilder.Entity("OneParagraph.Shared.Content.StockUser", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<Guid>("Stock")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Email", "Stock");
+
+                    b.ToTable("StockUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -318,7 +357,7 @@ namespace OneParagraph.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OneParagraph.Shared.Content.IndustryParagraph", b =>
+            modelBuilder.Entity("OneParagraph.Shared.Content.StockParagraph", b =>
                 {
                     b.HasOne("OneParagraph.Shared.Content.Stock", "Stock")
                         .WithMany()

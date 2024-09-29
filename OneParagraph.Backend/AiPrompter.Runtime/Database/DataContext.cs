@@ -8,6 +8,8 @@ public class DataContext : DbContext
     private readonly AppSettings _appSettings;
 
     public DbSet<IndustryParagraph> IndustryParagraphs { get; set; }
+    public DbSet<StockParagraph> StockParagraphs { get; set; }
+    public DbSet<Stock> Stocks { get; set; }
 
     public DataContext(AppSettings appSettings) 
     {

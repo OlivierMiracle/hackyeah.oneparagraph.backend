@@ -67,6 +67,8 @@ app.MapIdentityApi<IdentityUser>();
 
 app.UseHttpsRedirection();
 
+app.ApplyMigrations();
+
 app.UseAuthorization();
 
 app.MapEndpoints();

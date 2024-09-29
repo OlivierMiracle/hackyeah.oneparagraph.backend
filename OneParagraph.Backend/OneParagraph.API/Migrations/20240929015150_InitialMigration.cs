@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OneParagraph.API.Migrations
 {
     /// <inheritdoc />
-    public partial class Identity : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,6 +66,58 @@ namespace OneParagraph.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "IndustryParagraphs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Industry = table.Column<int>(type: "int", nullable: false),
+                    Paragraph = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Stocks = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SourceUrls = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SourceNames = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndustryParagraphs", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Stocks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Symbol = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stocks", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "StockUsers",
+                columns: table => new
+                {
+                    Email = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Stock = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StockUsers", x => new { x.Email, x.Stock });
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -196,6 +248,27 @@ namespace OneParagraph.API.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "StockParagraphs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    StockId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Paragraph = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StockParagraphs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StockParagraphs_Stocks_StockId",
+                        column: x => x.StockId,
+                        principalTable: "Stocks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -228,10 +301,21 @@ namespace OneParagraph.API.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Email",
+                table: "AspNetUsers",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StockParagraphs_StockId",
+                table: "StockParagraphs",
+                column: "StockId");
         }
 
         /// <inheritdoc />
@@ -253,10 +337,22 @@ namespace OneParagraph.API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "IndustryParagraphs");
+
+            migrationBuilder.DropTable(
+                name: "StockParagraphs");
+
+            migrationBuilder.DropTable(
+                name: "StockUsers");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Stocks");
         }
     }
 }
