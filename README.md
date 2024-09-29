@@ -1,6 +1,8 @@
 # HackYeah - One Paragraph
 One Paragraph is a service designed to fetch and provide concise market news summaries to users via a mobile app.
 
+Presentation: https://docs.google.com/presentation/d/1gMfPc1BGj1o_IwfHMIEVOLpt06fU7AOcCv2eZMVtMiI/edit?usp=sharing
+
 # How to access One Paragraph?
 Mobile App: <br />
 Web Application: <br />
