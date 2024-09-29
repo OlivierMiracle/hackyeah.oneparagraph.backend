@@ -237,16 +237,19 @@ namespace OneParagraph.API.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("SourceNames")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("SourceUrls")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("StockId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Stocks")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StockId");
 
                     b.ToTable("IndustryParagraphs");
                 });
@@ -352,17 +355,6 @@ namespace OneParagraph.API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("OneParagraph.Shared.Content.IndustryParagraph", b =>
-                {
-                    b.HasOne("OneParagraph.Shared.Content.Stock", "Stock")
-                        .WithMany()
-                        .HasForeignKey("StockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("OneParagraph.Shared.Content.StockParagraph", b =>
