@@ -1,6 +1,7 @@
 ﻿using AiPrompter.Runtime.Models;
 using AiPrompter.Runtime.Services.Interfaces;
 using Azure.AI.OpenAI;
+using OneParagraph.Shared.Content;
 using OneParagraph.Shared.Enums;
 using OpenAI.Chat;
 using System.Collections.Generic;
@@ -76,6 +77,75 @@ public class AiServiceContext(AzureOpenAIClient openAIClient) : IAiServiceContex
             var tokensOutDetails = response.Value.Usage.OutputTokenDetails;
 
             result.Add((summarizedNews.Key ,response.Value.Content[0].Text));
+        }
+
+        return result;
+    }
+
+    public async Task<List<(Stock, string)>> PromptAiFormStock(Dictionary<Stock, List<MarketauxGetNewsByCategoryResponse>> newsFromApi)
+    {
+        var news = new Dictionary<Stock, string>();
+
+        foreach (var industry in newsFromApi)
+        {
+            string str = "";
+
+            foreach (var entity in industry.Value)
+            {
+                foreach (var itemData in entity.Data)
+                {
+                    str = itemData.Title + "\n"
+                        + itemData.Description + "\n"
+                        + itemData.Snippet + "\n";
+
+                    if (itemData.Entities.Count > 0)
+                    {
+                        foreach (var entityItem in itemData.Entities)
+                        {
+                            str += "Company/Entity: ";
+                            str += entityItem.Name;
+                            str += "\n";
+
+                            if (itemData.Entities[0].Highlights.Count > 0)
+                            {
+                                foreach (var highlightItem in itemData.Entities[0].Highlights)
+                                {
+                                    str += "Highlights about the entity: ";
+                                    str += highlightItem.HighlightText;
+                                    str += "\n";
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(str))
+                    news[industry.Key] = str;
+            }
+        }
+
+        var result = new List<(Stock, string)>();
+        int tokensIn = 0;
+        int tokensOut = 0;
+
+        foreach (var summarizedNews in news)
+        {
+            var messages = new List<ChatMessage>
+            {
+                new SystemChatMessage(SystemPropmt),
+                new UserChatMessage(summarizedNews.Value)
+            };
+
+            var chatClient = openAIClient.GetChatClient("gpt-4o-mini");
+            var options = new ChatCompletionOptions() { };
+
+            var response = await chatClient.CompleteChatAsync(messages, options);
+
+            tokensIn += response.Value.Usage.InputTokenCount;
+            tokensOut += response.Value.Usage.OutputTokenCount;
+            var tokensOutDetails = response.Value.Usage.OutputTokenDetails;
+
+            result.Add((summarizedNews.Key, response.Value.Content[0].Text));
         }
 
         return result;

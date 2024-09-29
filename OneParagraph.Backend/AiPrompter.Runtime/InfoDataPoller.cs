@@ -23,16 +23,19 @@ public class InfoDataPoller(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get")]
         HttpRequest request)
     {
-        var apiResult = await newsDataPollerService.GetCategoryNewsAsync();
-        var result = await aiServiceContext.PromptAi(apiResult);
+        //var apiResult = await newsDataPollerService.GetCategoryNewsAsync();
+        //var result = await aiServiceContext.PromptAi(apiResult);
 
-        CreateIndustryParagraphs(context, apiResult, result);
+        var apiResultStock = await newsDataPollerService.GetStockNewsAsync();
+        var resultStock = await aiServiceContext.PromptAiFormStock(apiResultStock);
+
+        //await CreateIndustryParagraphs(apiResult, result);
+        await CreateStockParagraphs(resultStock);
 
         return new Response(true);
     }
 
-    private static void CreateIndustryParagraphs(DataContext context,
-        Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>> apiResult, List<(Industries, string)> result)
+    private async Task CreateIndustryParagraphs(Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>> apiResult, List<(Industries, string)> result)
     {
         var paragraphs = new List<IndustryParagraph>();
 
@@ -49,6 +52,7 @@ public class InfoDataPoller(
                     .SelectMany(r => r.Data)
                     .SelectMany(d => d.Entities)
                     .Select(e => e.Symbol)
+                    .ToHashSet()
                     .ToList(),
                 DateTime = DateTime.Now,
                 SourceUrls = GetSourceUrls(apiResult[news.Item1]),
@@ -63,7 +67,7 @@ public class InfoDataPoller(
 
     private static List<string> GetSourceUrls(List<MarketauxGetNewsByCategoryResponse> data)
     {
-        var result = new List<string>();
+        var result = new HashSet<string>();
 
         foreach (var item in data)
         {
@@ -73,12 +77,12 @@ public class InfoDataPoller(
             }
         }
 
-        return result;
+        return result.ToList();
     }
 
     private static List<string> GetSourceNames(List<MarketauxGetNewsByCategoryResponse> data)
     {
-        var result = new List<string>();
+        var result = new HashSet<string>();
 
         foreach (var item in data)
         {
@@ -88,6 +92,25 @@ public class InfoDataPoller(
             }
         }
 
-        return result;
+        return result.ToList();
+    }
+
+    private async Task CreateStockParagraphs(List<(Stock, string)> stocks)
+    {
+        var stocksParagraphs = new List<StockParagraph>();
+
+        foreach (var stock in stocks)
+        {
+            stocksParagraphs.Add(new StockParagraph()
+            {
+                Id = Guid.NewGuid(),
+                Stock = stock.Item1,
+                Paragraph = stock.Item2
+            });
+
+            context.StockParagraphs.AddRange(stocksParagraphs);
+
+            await context.SaveChangesAsync();
+        }
     }
 }

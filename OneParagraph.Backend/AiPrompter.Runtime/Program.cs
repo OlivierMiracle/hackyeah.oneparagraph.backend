@@ -33,6 +33,6 @@ internal class Program : FunctionsStartup
 
         builder.Services.AddScoped<IAiServiceContext, AiServiceContext>();
 
-        builder.Services.AddSingleton<INewsDataPollerService, NewsDataPollerService>();
+        builder.Services.AddScoped<INewsDataPollerService, NewsDataPollerService>();
     }
 }

@@ -24,7 +24,7 @@ public sealed class AddStockToUser : IEndpoint
 
             return Results.Ok();
         })
-            .RequireAuthorization();
+        .RequireAuthorization();
     }
 
     internal class Request
