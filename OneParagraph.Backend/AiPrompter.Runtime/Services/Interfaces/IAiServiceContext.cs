@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AiPrompter.Runtime.Services.Interfaces;
 
-public interface INewsDataPollerService
+public interface IAiServiceContext
 {
-    Task<Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>>> GetCategoryNewsAsync();
+    Task<List<(Industries, string)>> PromptAi(Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>> newsFromApi);
 }
