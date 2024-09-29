@@ -6,6 +6,7 @@ using Azure;
 using Azure.AI.OpenAI;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: FunctionsStartup(typeof(AiPrompter.Runtime.Program))]
@@ -15,6 +16,12 @@ internal class Program : FunctionsStartup
 {
     public override void Configure(IFunctionsHostBuilder builder)
     {
+        var configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .Build();
+
+        builder.Services.AddSingleton<IConfiguration>(configuration);
+
         var appSettings = new AppSettings(new SafeConfiguration(builder.GetContext().Configuration));
         builder.Services.AddSingleton(appSettings);
 
