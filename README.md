@@ -3,9 +3,13 @@ One Paragraph is a service designed to fetch and provide concise market news sum
 
 Presentation: https://docs.google.com/presentation/d/1gMfPc1BGj1o_IwfHMIEVOLpt06fU7AOcCv2eZMVtMiI/edit?usp=sharing
 
+# Project repositories:
+- Frontend: https://github.com/Xp4blos/hackyeah.oneparagraph.frontend
+- Backend: https://github.com/OlivierMiracle/hackyeah.oneparagraph.backend
+
 # How to access One Paragraph?
-Mobile App: <br />
-Web Application: <br />
+Mobile App (Android): <br />
+Web Application: http://pawelorlik.pl <br />
 API: https://app-dev-oneparagraph-hqf2erhmhddufnb7.westeurope-01.azurewebsites.net/swagger/index.html <br />
 Function App: https://func-dev-oneparagraph.azurewebsites.net <br />
 
