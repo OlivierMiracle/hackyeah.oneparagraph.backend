@@ -45,12 +45,10 @@ API User Secrets: <br />
 }
 ````
 
-## Step 1:
-Clone this repository.
-## Step 2:
-Add User Secrets
-## Step 3:
-Run either the Function app or API with Visual Studio 2022
+## Steps:
+- Clone this repository.
+- Add User Secrets
+- Run either the Function app or API with Visual Studio 2022
 
 # Current State:
 - The Category tab is fully functional.
