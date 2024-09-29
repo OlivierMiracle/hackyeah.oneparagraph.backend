@@ -2,6 +2,8 @@
 using AiPrompter.Runtime.Infrastructure;
 using AiPrompter.Runtime.Services;
 using AiPrompter.Runtime.Services.Interfaces;
+using Azure;
+using Azure.AI.OpenAI;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,15 @@ internal class Program : FunctionsStartup
             var connectionString = appSettings.DatabaseConnectionString;
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         });
+
+        builder.Services.AddScoped(sp =>
+        {
+            var credential = new AzureKeyCredential(appSettings.OpenApiKey);
+
+            return new AzureOpenAIClient(new System.Uri(appSettings.OpenApiUrl), credential);
+        });
+
+        builder.Services.AddScoped<IAiServiceContext, AiServiceContext>();
 
         builder.Services.AddSingleton<INewsDataPollerService, NewsDataPollerService>();
     }
