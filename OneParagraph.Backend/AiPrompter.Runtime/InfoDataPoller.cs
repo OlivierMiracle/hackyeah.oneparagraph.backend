@@ -23,13 +23,13 @@ public class InfoDataPoller(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get")]
         HttpRequest request)
     {
-        //var apiResult = await newsDataPollerService.GetCategoryNewsAsync();
-        //var result = await aiServiceContext.PromptAi(apiResult);
+        var apiResult = await newsDataPollerService.GetCategoryNewsAsync();
+        var result = await aiServiceContext.PromptAi(apiResult);
 
         var apiResultStock = await newsDataPollerService.GetStockNewsAsync();
         var resultStock = await aiServiceContext.PromptAiFormStock(apiResultStock);
 
-        //await CreateIndustryParagraphs(apiResult, result);
+        await CreateIndustryParagraphs(apiResult, result);
         await CreateStockParagraphs(resultStock);
 
         return new Response(true);

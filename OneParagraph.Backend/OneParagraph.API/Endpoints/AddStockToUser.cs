@@ -18,7 +18,12 @@ public sealed class AddStockToUser : IEndpoint
             if (user == null)
                 return Results.StatusCode(418);
 
-            context.StockUsers.Add(new StockUser { Email = request.Email, Stock = request.StockId });
+            var stock = await context.Stocks.FirstOrDefaultAsync(x => x.Symbol == request.Symbol);
+
+            if (stock == null)
+                return Results.StatusCode(404);
+
+            context.StockUsers.Add(new StockUser { Email = request.Email, Stock = stock.Id });
 
             await context.SaveChangesAsync();
 
@@ -30,6 +35,6 @@ public sealed class AddStockToUser : IEndpoint
     internal class Request
     {
         public string Email { get; set; }
-        public Guid StockId { get; set; }
+        public string Symbol { get; set; }
     }
 }
