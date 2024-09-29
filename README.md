@@ -14,9 +14,45 @@ The current architecture follows a modular approach:
 ![Screenshot 2024-09-29 082526](https://github.com/user-attachments/assets/8c125dab-ac83-4c4d-9a6c-ffb363b04926)
 
 # Architecture To-Be
-The current architecture follows a modular approach:
+Our desired architecture:
 - Function App pulls the news from multiple external providers through API Management.
 - API Management is responsible for managing the API access from a unified and centrally visible platform.
 - Database stores news summaries from different categories, news about specific stocks, and other necessary data to analyze news with the context of past events.
 - Mobile App interacts with the API to display news to users and notify them about market updates.
 ![Screenshot 2024-09-29 082354](https://github.com/user-attachments/assets/90881933-6c53-417b-b5ee-2e19f405721b)
+
+# How to run it locally?
+## Requirements:
+- Visual Studio 2022 with Azure Development and ASP.NET and web development extensions
+- .NET 8
+
+## Api key:
+Function App User Secrets: <br />
+````
+{
+	"MarketauxApiBaseUrl": "https://api.marketaux.com/v1/news/all",
+	"MarketauxApiKey": "API Key for api.marketaux.com",
+	"MarketauxApiKeyStock": "API Key for api.marketaux.com v2",
+	"DatabaseConnectionString": "Connection string to MariaDB with the database name: oneparagraph",
+	"OpenApiKey": "Key to OpenApi from Azure AI Platform",
+	"OpenApiUrl": "OpenApi URL from Azure AI Platform"
+}
+````
+API User Secrets: <br />
+````
+{
+	"DbConnectionString": "Connection string to MariaDB with the database name: oneparagraph"
+}
+````
+
+## Step 1:
+Clone this repository.
+## Step 2:
+Add User Secrets
+## Step 3:
+Run either the Function app or API with Visual Studio 2022
+
+# Current State:
+- The Category tab is fully functional.
+- The Stock tab is partially done. We have all the required data in the backend (deserialized data from the news provider and summarized paragraphs).
+- The Trending tab can be done at any time. Requires paid news API subscription.
