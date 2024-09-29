@@ -61,22 +61,6 @@ public class InfoDataPoller(
         context.SaveChanges();
     }
 
-    //private static string GetStockSymbol(List<MarketauxGetNewsByCategoryResponse> apiResult) 
-    //{
-    //    foreach (var item in apiResult)
-    //    {
-    //        foreach (var news in item.Data)
-    //        {
-    //            return news.
-    //        }
-    //    }   
-    //}
-
-    //private static string GetStockName(List<MarketauxGetNewsByCategoryResponse> apiResult)
-    //{
-
-    //}
-
     private static List<string> GetSourceUrls(List<MarketauxGetNewsByCategoryResponse> data)
     {
         var result = new List<string>();
