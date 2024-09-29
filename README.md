@@ -1,10 +1,10 @@
 # HackYeah - One Paragraph
 
 # How to access One Paragraph?
-Mobile App:
-Web Application: 
-API: https://app-dev-oneparagraph-hqf2erhmhddufnb7.westeurope-01.azurewebsites.net/swagger/index.html
-Function App: https://func-dev-oneparagraph.azurewebsites.net
+Mobile App: <br />
+Web Application: <br />
+API: https://app-dev-oneparagraph-hqf2erhmhddufnb7.westeurope-01.azurewebsites.net/swagger/index.html <br />
+Function App: https://func-dev-oneparagraph.azurewebsites.net <br />
 
 # Architecture As-Is
 ![Screenshot 2024-09-29 082526](https://github.com/user-attachments/assets/8c125dab-ac83-4c4d-9a6c-ffb363b04926)
