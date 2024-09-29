@@ -25,6 +25,7 @@ Our desired architecture:
 ![Screenshot 2024-09-29 082354](https://github.com/user-attachments/assets/90881933-6c53-417b-b5ee-2e19f405721b)
 
 # How to run it locally?
+Please read [How to access One Paragraph?](#how-to-access-one-paragraph) first.
 ## Requirements:
 - Visual Studio 2022 with Azure Development and ASP.NET and web development extensions
 - .NET 8
