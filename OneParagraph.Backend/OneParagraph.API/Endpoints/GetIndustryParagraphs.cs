@@ -15,7 +15,7 @@ public sealed class GetIndustryParagraphs : IEndpoint
             {
                 List<IndustryParagraph> paragraphs = [];
                 
-                foreach (Industries industry in Enum.GetValues<Industries>())
+                foreach (Industry industry in Enum.GetValues<Industry>())
                 {
                     var paragraph = await context.IndustryParagraphs.OrderByDescending(i => i.DateTime)
                         .FirstOrDefaultAsync(i => i.Industry == industry);

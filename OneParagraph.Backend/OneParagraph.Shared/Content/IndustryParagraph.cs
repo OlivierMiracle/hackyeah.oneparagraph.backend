@@ -5,7 +5,7 @@ namespace OneParagraph.Shared.Content;
 public class IndustryParagraph
 {
     public Guid Id { get; set; }
-    public Industries Industry { get; set; }
+    public Industry Industry { get; set; }
     public string Paragraph { get; set; }
     public DateTime DateTime { get; set; }
     public List<string> Stocks { get; set; }

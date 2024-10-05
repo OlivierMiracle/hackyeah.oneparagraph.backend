@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using OneParagraph.Shared.Content;
+using OneParagraph.Shared.Identity;
 
 namespace OneParagraph.API.Database;
 
@@ -13,6 +14,8 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     public DbSet<StockUser> StockUsers { get; set; }
     public DbSet<Stock> Stocks { get; set; }
     
+    //DbSert of users using User model inheriting from IdentityUser
+    public new DbSet<User> Users { get; set; }
     public AppDbContext() { }
     public AppDbContext(DbContextOptions options) : base(options) { }
 

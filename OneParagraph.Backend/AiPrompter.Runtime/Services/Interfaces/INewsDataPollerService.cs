@@ -8,6 +8,6 @@ namespace AiPrompter.Runtime.Services.Interfaces;
 
 public interface INewsDataPollerService
 {
-    Task<Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>>> GetCategoryNewsAsync();
+    Task<Dictionary<Industry, List<MarketauxGetNewsByCategoryResponse>>> GetCategoryNewsAsync();
     Task<Dictionary<Stock, List<MarketauxGetNewsByCategoryResponse>>> GetStockNewsAsync();
 }

@@ -13,9 +13,9 @@ public class AiServiceContext(AzureOpenAIClient openAIClient) : IAiServiceContex
 {
     private readonly string SystemPropmt = "You are an AI assistant responsible for summarizing stock market news for a mobile app. Your task is to condense relevant information about stocks, market trends, and key financial news into a single, concise paragraph. Make sure the summary is clear, informative, and easy to understand, avoiding technical jargon. Focus on delivering key insights such as major stock movements, market fluctuations, economic events, or company announcements that could impact the market. The summary should be no longer than 3-4 sentences, providing users with a quick yet comprehensive snapshot of the latest stock market activity. You must not, under any circumstances, fabricate or include fictional information. Only provide facts based on the provided data.";
 
-    public async Task<List<(Industries, string)>> PromptAi(Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>> newsFromApi)
+    public async Task<List<(Industry, string)>> PromptAi(Dictionary<Industry, List<MarketauxGetNewsByCategoryResponse>> newsFromApi)
     {
-        var news = new Dictionary<Industries, string>();
+        var news = new Dictionary<Industry, string>();
 
         foreach (var industry in newsFromApi) 
         {
@@ -55,7 +55,7 @@ public class AiServiceContext(AzureOpenAIClient openAIClient) : IAiServiceContex
             }            
         }
 
-        var result = new List<(Industries, string)>();
+        var result = new List<(Industry, string)>();
         int tokensIn = 0;
         int tokensOut = 0;
 

@@ -35,7 +35,7 @@ public class InfoDataPoller(
         return new Response(true);
     }
 
-    private async Task CreateIndustryParagraphs(Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>> apiResult, List<(Industries, string)> result)
+    private async Task CreateIndustryParagraphs(Dictionary<Industry, List<MarketauxGetNewsByCategoryResponse>> apiResult, List<(Industry, string)> result)
     {
         var paragraphs = new List<IndustryParagraph>();
 

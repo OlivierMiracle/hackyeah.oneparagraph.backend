@@ -8,6 +8,6 @@ namespace AiPrompter.Runtime.Services.Interfaces;
 
 public interface IAiServiceContext
 {
-    Task<List<(Industries, string)>> PromptAi(Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>> newsFromApi);
+    Task<List<(Industry, string)>> PromptAi(Dictionary<Industry, List<MarketauxGetNewsByCategoryResponse>> newsFromApi);
     Task<List<(Stock, string)>> PromptAiFormStock(Dictionary<Stock, List<MarketauxGetNewsByCategoryResponse>> newsFromApi);
 }

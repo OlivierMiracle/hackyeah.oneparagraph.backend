@@ -16,13 +16,13 @@ namespace AiPrompter.Runtime.Services;
 
 public class NewsDataPollerService(AppSettings appSettings, DataContext context) : INewsDataPollerService
 {
-    public async Task<Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>>> GetCategoryNewsAsync()
+    public async Task<Dictionary<Industry, List<MarketauxGetNewsByCategoryResponse>>> GetCategoryNewsAsync()
     {
-        Dictionary<Industries, List<MarketauxGetNewsByCategoryResponse>> categoryResponses = new();
+        Dictionary<Industry, List<MarketauxGetNewsByCategoryResponse>> categoryResponses = new();
 
-        foreach (var item in Enum.GetNames(typeof(Industries)))
+        foreach (var item in Enum.GetNames(typeof(Industry)))
         {
-            var enumVal = Enum.Parse<Industries>(item);
+            var enumVal = Enum.Parse<Industry>(item);
 
             var newsPositive = await GetSingleCategoryNews(enumVal, "desc");
             var newsNegative = await GetSingleCategoryNews(enumVal, "asc");
@@ -82,7 +82,7 @@ public class NewsDataPollerService(AppSettings appSettings, DataContext context)
         return content;
     }
 
-    private async Task<MarketauxGetNewsByCategoryResponse> GetSingleCategoryNews(Industries industry, string order)
+    private async Task<MarketauxGetNewsByCategoryResponse> GetSingleCategoryNews(Industry industry, string order)
     {
         var client = new RestClient(appSettings.MarketauxApiBaseUrl);
 
