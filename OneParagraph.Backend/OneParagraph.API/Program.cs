@@ -10,8 +10,6 @@ using OneParagraph.API.Database;
 using OneParagraph.API.Extensions;
 using Swashbuckle.AspNetCore.Filters;
 
-Console.WriteLine("***** BOBER");
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors();

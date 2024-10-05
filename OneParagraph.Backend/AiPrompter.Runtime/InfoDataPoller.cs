@@ -1,9 +1,7 @@
 ﻿using System;
 using AiPrompter.Runtime.Models;
 using AiPrompter.Runtime.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
 using OneParagraph.Shared.Content;
 using OneParagraph.Shared.Enums;
 using System.Collections.Generic;
@@ -19,17 +17,15 @@ public class InfoDataPoller(
     DataContext context)
 {
     [FunctionName(nameof(InfoDataPoller))]
-    public async Task<Response> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get")]
-        HttpRequest request)
+    public async Task<Response> Run([TimerTrigger("0 */6 * * *")] TimerInfo myTimer)
     {
-        //var apiResult = await newsDataPollerService.GetCategoryNewsAsync();
-        //var result = await aiServiceContext.PromptAi(apiResult);
+        var apiResult = await newsDataPollerService.GetCategoryNewsAsync();
+        var result = await aiServiceContext.PromptAi(apiResult);
 
         var apiResultStock = await newsDataPollerService.GetStockNewsAsync();
         var resultStock = await aiServiceContext.PromptAiFormStock(apiResultStock);
 
-        //await CreateIndustryParagraphs(apiResult, result);
+        await CreateIndustryParagraphs(apiResult, result);
         await CreateStockParagraphs(resultStock);
 
         return new Response(true);
